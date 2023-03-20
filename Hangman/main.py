@@ -1,15 +1,16 @@
 import random
 import hangman_art
-import hangman_words
+from hangman_words import word_list
 
-words = hangman_words.word_list
-random_word = random.choice(words)
+
+random_word = random.choice(word_list)
 guessed_letters = []
 word_length = len(random_word)
 lives = 6
 stages = hangman_art.stages
 
-# Using "_" in the for loop as value of variable is not needed
+# Use "_" in the for loop as value of variable is not needed
+# create banks
 for _ in range(word_length):
     guessed_letters.append("_")
 
@@ -21,6 +22,9 @@ while not end_of_game:
     print(stages[lives])
     print(" ".join(guessed_letters))
     user_guess = input("Guess a letter: ").lower()
+
+    if user_guess in guessed_letters:
+        print(f"You have already guessed the letter {user_guess}.")
 
     if user_guess in random_word:
         is_guess_correct = True
