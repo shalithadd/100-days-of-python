@@ -1,5 +1,10 @@
-def encrypt(text, shift):
+from art import logo
+
+
+def caesar(text, shift, direction):
     new_text = []
+    if direction == "decode":
+        shift *= -1
     for char in range(len(text)):
         new_idx = alphabet.index(text[char]) + shift
         if new_idx < len(alphabet):
@@ -7,14 +12,6 @@ def encrypt(text, shift):
         else:
             new_idx = new_idx % len(alphabet)
             new_text.append(alphabet[new_idx])
-    print("".join(new_text))
-
-
-def decrypt(text, shift):
-    new_text = []
-    for char in range(len(text)):
-        new_idx = alphabet.index(text[char]) - shift
-        new_text.append(alphabet[new_idx])
     print("".join(new_text))
 
 
@@ -47,11 +44,17 @@ alphabet = [
     "z",
 ]
 
-direction = input("Type 'encode' to encrypt, type 'decode' to decrypt:\n")
-text = input("Type your message:\n").lower()
-shift = int(input("Type the shift number:\n"))
+print(logo)
+should_continue = True
 
-if direction == "encode":
-    encrypt(text, shift)
-elif direction == "decode":
-    decrypt(text, shift)
+while should_continue:
+    direction = input("Type 'encode' to encrypt, type 'decode' to decrypt:\n")
+    text = input("Type your message:\n").lower()
+    shift = int(input("Type the shift number:\n"))
+    caesar(text, shift, direction)
+
+    choice = input("type 'y' to use again or type 'n' to quit.\n").lower()
+    if choice == "y":
+        should_continue = True
+    else:
+        should_continue = False
