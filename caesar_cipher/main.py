@@ -1,18 +1,18 @@
 from art import logo
 
 
-def caesar(text, shift, direction):
-    new_text = []
-    if direction == "decode":
-        shift *= -1
-    for char in range(len(text)):
-        new_idx = alphabet.index(text[char]) + shift
+def caesar(start_text, shift_amount, cipher_direction):
+    end_text = []
+    if cipher_direction == "decode":
+        shift_amount *= -1
+    for char in range(len(start_text)):
+        new_idx = alphabet.index(start_text[char]) + shift_amount
         if new_idx < len(alphabet):
-            new_text.append(alphabet[new_idx])
+            end_text.append(alphabet[new_idx])
         else:
             new_idx = new_idx % len(alphabet)
-            new_text.append(alphabet[new_idx])
-    print("".join(new_text))
+            end_text.append(alphabet[new_idx])
+    print("".join(end_text))
 
 
 alphabet = [
@@ -50,8 +50,8 @@ should_continue = True
 while should_continue:
     direction = input("Type 'encode' to encrypt, type 'decode' to decrypt:\n")
     text = input("Type your message:\n").lower()
-    shift = int(input("Type the shift number:\n"))
-    caesar(text, shift, direction)
+    shift = int(input("Type the shift_amount number:\n"))
+    caesar(start_text=text, shift_amount=shift, cipher_direction=direction)
 
     choice = input("type 'y' to use again or type 'n' to quit.\n").lower()
     if choice == "y":
