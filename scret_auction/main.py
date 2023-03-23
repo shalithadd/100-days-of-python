@@ -26,6 +26,7 @@ while should_continue:
         if value == highest_bid:
             winner = key
 
+    # check if need to continue or exit
     if other_bidders == "yes":
         should_continue = True
         clear()
