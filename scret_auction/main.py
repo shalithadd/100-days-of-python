@@ -7,30 +7,33 @@ def clear():
     os.system("cls")
 
 
+def find_highest_bidder(bid_entry):
+    highest_bid = 0
+    # loop through each key in bid_entry dict and compare each value with highest_bid
+    for bidder in bid_entry:
+        if bid_entry[bidder] > highest_bid:
+            highest_bid = bid_entry[bidder]
+            winner = bidder
+    print(f"The winner is {winner} with a bid of ${highest_bid}.")  # pyright:ignore
+
+
 print(logo)
 bidders = {}
+bidding_finished = False
 
-should_continue = True
-while should_continue:
+while not bidding_finished:
     name = input("What is your name?: ")
     bid = int(input("What's your bid?: "))
-    other_bidders = input("Are there any other bidders? Type 'yes' or 'no': ").lower()
+    should_continue = input("Are there any other bidders? Type 'yes' or 'no': ").lower()
 
     # add name and bid to bidders dict
     bidders[name] = bid
-    # get the highest bid with max()
-    highest_bid = max(bidders.values())
-
-    # get the key of the highest bid
-    for key, value in bidders.items():
-        if value == highest_bid:
-            winner = key
 
     # check if need to continue or exit
-    if other_bidders == "yes":
-        should_continue = True
+    if should_continue == "yes":
+        bidding_finished = False
         clear()
     else:
-        should_continue = False
+        bidding_finished = True
         clear()
-        print(f"The winner is {winner}.")  # pyright: ignore
+        find_highest_bidder(bidders)
