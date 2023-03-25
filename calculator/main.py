@@ -27,32 +27,22 @@ operations = {
 print(logo)
 should_continue = True
 new_calculation = True
+num1 = int(input("What's the first number?: "))
+for symbol in operations:
+    print(symbol)
+
 while should_continue:
-    if new_calculation:
-        num1 = int(input("What's the first number?: "))
+    operator = input("Select the operation: ")
+    num2 = int(input("What's the next number?: "))
+    calculation_function = operations[operator]
+    answer = calculation_function(n1=num1, n2=num2)
 
-        for symbol in operations:
-            print(symbol)
+    print(f"{num1} {operator} {num2} = {answer}")
 
-        operator = input("Select the operation: ")
-        num2 = int(input("What's the next number?: "))
-        calculation_function = operations[operator]
-        sum = calculation_function(n1=num1, n2=num2)
-        print(f"{num1} {operator} {num2} = {sum}")
-
-    else:
-        operator = input("Select the operation: ")
-        num3 = int(input("What's the next number?: "))
-        calculation_function = operations[operator]
-        sum2 = calculation_function(n1=sum, n2=num3)
-        print(f"{sum} {operator} {num3} = {sum2}")
-        sum = sum2
-    user_choice = input(
-        f"Type 'y' to continue calculating with {sum} or type 'n' to start new calculation or type 'q' to exit: "
-    ).lower()
-    if user_choice == "y":
-        new_calculation = False
-    elif user_choice == "n":
-        new_calculation = True
+    if (
+        input(f"Type 'y' to continue calculating with {answer} or type 'q' to exit: ")
+        == "y"
+    ):
+        num1 = answer
     else:
         should_continue = False
