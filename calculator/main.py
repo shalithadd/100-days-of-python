@@ -48,7 +48,7 @@ while should_continue:
         print(f"{sum} {operator} {num3} = {sum2}")
         sum = sum2
     user_choice = input(
-        f"Type 'y' to continue calculating with {sum} or type 'n' to start new calculation or type 'q' to quite: "
+        f"Type 'y' to continue calculating with {sum} or type 'n' to start new calculation or type 'q' to exit: "
     ).lower()
     if user_choice == "y":
         new_calculation = False
