@@ -24,9 +24,7 @@ def win_condition(user_hand, computer_hand, deck):
         print(f"\n  {user_state}\n  {computer_state}")
         print(user_lose)
     elif computer_total < 17:
-        if computer_total <= 10:
-            deck[0] = 10
-        else:
+        if computer_total > 10:
             deck[0] = 1
         computer_hand.append(random.choice(deck))
         win_condition(user_hand, computer_hand, deck)
@@ -54,16 +52,14 @@ def blackjack():
 
     while should_continue:
         if input("Type 'y' to get another card, type 'n' to pass: ") == "y":
-            if sum(user_hand) <= 10:
-                deck[0] = 11
-            else:
+            if sum(user_hand) > 10:
                 deck[0] = 1
             user_hand.append(random.choice(deck))
             if sum(user_hand) > 21:
                 win_condition(user_hand, computer_hand, deck)
                 should_continue = False
             else:
-                print(f"\nYour cards: {user_hand}")
+                print(f"\nYour cards: {user_hand}, total: {sum(user_hand)}")
 
         else:
             win_condition(user_hand, computer_hand, deck)
