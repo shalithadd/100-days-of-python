@@ -48,8 +48,10 @@ def new_game():
     if attempts_remaining == 0:
         print("You've ran out of guesses, you lose.")
         print(f"Correct answer was {random_number}.")
-        if input("Type 'y' to play again or type 'n' to exit: ").lower() == "y":
-            new_game()
+
+
+if input("Type 'y' to play again or type 'n' to exit: ").lower() == "y":
+    new_game()
 
 
 new_game()
