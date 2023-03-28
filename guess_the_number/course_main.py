@@ -52,7 +52,7 @@ def new_game():
         if attempts == 0:
             print("You've ran out of guesses, you lose.")
             print(f"Correct answer was {random_number}.")
-            return
+            break
         elif user_guess != random_number:
             print("Guess again.")
 
