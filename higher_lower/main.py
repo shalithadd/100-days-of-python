@@ -47,15 +47,16 @@ def game():
     correct_answer = True
     score = 0
     bio_a, follower_count_a = set_compare()
-
+    bio_b, follower_count_b = set_compare()
     while correct_answer:
-        bio_b, follower_count_b = set_compare()
+        while bio_a == bio_b:
+            bio_b, follower_count_b = set_compare()
         print(f"Compare A: {bio_a}.")
         print(vs)
         print(f"Compare B: {bio_b}.")
         answer = input("Who has more followers 'A' or 'B': ").lower()
         winner = compare_followers(follower_count_a, follower_count_b)
-        # If answer is correct  A becomes B
+        # If answer is correct A becomes B
         if winner == answer:
             score = print_score(winner, answer, score)
             bio_a = bio_b
