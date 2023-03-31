@@ -1,5 +1,3 @@
-
-
 MENU = {
     "espresso": {
         "ingredients": {
@@ -23,7 +21,7 @@ MENU = {
             "coffee": 24,
         },
         "cost": 3.0,
-    }
+    },
 }
 
 resources = {
@@ -44,34 +42,36 @@ def print_report():
 
 def check_resources(order):
     order_ingredients = MENU[order]["ingredients"]
+    cost = MENU[order]["cost"]
+    message = ""
     if order_ingredients["water"] > resources["water"]:
-        print("Sorry there's not enough water.")
+        message = "Sorry there's not enough water."
     elif order_ingredients["coffee"] > resources["coffee"]:
-        print("Sorry there's not enough coffee.")
-    elif "milk" in order_ingredients.keys() and order_ingredients["milk"] > resources["milk"]:
-        print("Sorry there's not enough milk.")
-    else:
-        return MENU[order]["cost"], order_ingredients
+        message = "Sorry there's not enough coffee."
+    elif (
+        "milk" in order_ingredients.keys()
+        and order_ingredients["milk"] > resources["milk"]
+    ):
+        message = "Sorry there's not enough milk."
+
+    return cost, order_ingredients, message
 
 
 def process_coins():
     coin_types = {
         "quarters": {
             "count": 0,
-            "value": .25,
+            "value": 0.25,
         },
         "dimes": {
             "count": 0,
-            "value": .10,
+            "value": 0.10,
         },
         "nickles": {
             "count": 0,
-            "value": .05,
+            "value": 0.05,
         },
-        "pennies": {
-            "count": 0,
-            "value": .01
-        },
+        "pennies": {"count": 0, "value": 0.01},
     }
     for coin in coin_types:
         coin_types[coin]["count"] = int(input(f"How many {coin}?: "))
@@ -98,7 +98,11 @@ while is_on:
         is_on = False
         break
     else:
-        price, ingredients = check_resources(user_choice)
+        price, ingredients, message = check_resources(user_choice)
+    # If not enough resources to make coffee print message and go to start of the program
+    if message:
+        print(message)
+        continue
 
     total_coin_value = process_coins()
     if price > total_coin_value:
@@ -110,7 +114,3 @@ while is_on:
         resources["money"] += price
         print(f"Here is {total_coin_value % price: .2f} in change.")
         make_coffee(user_choice, ingredients)
-
-
-
-
