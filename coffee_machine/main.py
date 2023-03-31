@@ -33,6 +33,7 @@ resources = {
 
 
 def print_report():
+    """Print all the resources in the machine including money."""
     for key, value in resources.items():
         if key == "money":
             print(f"{key}: ${value}")
@@ -41,6 +42,8 @@ def print_report():
 
 
 def check_resources(order):
+    """Takes user's order and check if have enough resources to make the drink.
+    Returns order ingredients, order cost and the feedback message if not enough resources."""
     order_ingredients = MENU[order]["ingredients"]
     cost = MENU[order]["cost"]
     message = ""
@@ -58,6 +61,7 @@ def check_resources(order):
 
 
 def process_coins():
+    """Process coins and returns total coins value."""
     coin_types = {
         "quarters": {
             "count": 0,
@@ -83,6 +87,8 @@ def process_coins():
 
 
 def make_coffee(order, order_ingredients):
+    """Takes user's order and order ingredients, reduces the ingredients from resources,
+    prints the feedback message."""
     for ingredient in order_ingredients:
         resources[ingredient] -= order_ingredients[ingredient]
     print(f"Here is your {order} ☕. Enjoy!")
