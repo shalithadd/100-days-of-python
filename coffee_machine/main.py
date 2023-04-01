@@ -77,6 +77,7 @@ def process_coins():
         },
         "pennies": {"count": 0, "value": 0.01},
     }
+    print("Please insert coins.")
     for coin in coin_types:
         coin_types[coin]["count"] = int(input(f"How many {coin}?: "))
     # Calculate coins total
