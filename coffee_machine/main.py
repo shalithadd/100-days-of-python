@@ -47,15 +47,9 @@ def check_resources(order):
     order_ingredients = MENU[order]["ingredients"]
     cost = MENU[order]["cost"]
     message = ""
-    if order_ingredients["water"] > resources["water"]:
-        message = "Sorry there's not enough water."
-    elif order_ingredients["coffee"] > resources["coffee"]:
-        message = "Sorry there's not enough coffee."
-    elif (
-        "milk" in order_ingredients.keys()
-        and order_ingredients["milk"] > resources["milk"]
-    ):
-        message = "Sorry there's not enough milk."
+    for item in order_ingredients:
+        if order_ingredients[item] >= resources[item]:
+            message = f"Sorry there's not enough {item}."
 
     return cost, order_ingredients, message
 
