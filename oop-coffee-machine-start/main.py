@@ -8,7 +8,6 @@ coffee_machine = CoffeeMaker()
 transactions = MoneyMachine()
 while is_on:
     user_choice = input(f"What would you like? ({coffee_menu.get_items()}): ")
-
     if user_choice == "off":
         is_on = False
     elif user_choice == "report":
