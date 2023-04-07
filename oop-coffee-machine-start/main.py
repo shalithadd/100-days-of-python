@@ -15,7 +15,9 @@ while is_on:
         transactions.report()
     else:
         user_order = coffee_menu.find_drink(user_choice)
-        is_enough_resources = coffee_machine.is_resource_sufficient(user_order)
-        if is_enough_resources:
-            if transactions.make_payment(user_order.cost):  # pyright:ignore
+        if user_order:
+            is_enough_resources = coffee_machine.is_resource_sufficient(user_order)
+            if is_enough_resources and transactions.make_payment(
+                user_order.cost
+            ):  # pyright:ignore
                 coffee_machine.make_coffee(user_order)
