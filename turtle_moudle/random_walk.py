@@ -23,8 +23,8 @@ def random_pencolour():
 
 
 tim.hideturtle()
-tim.pensize(12)
-tim.speed(8)
+tim.pensize(15)
+tim.speed(10)
 while True:
     tim.pencolor(random_pencolour())
     walk_random(30, 90)
