@@ -1,13 +1,25 @@
-import colorgram
+from rbg_colours import colour_list
+from turtle import Turtle, Screen
+import random
 
-colours = colorgram.extract('image.jpeg', 10)
+screen = Screen()
+screen.colormode(255)
 
-rgb_colours = []
-for colour in colours:
-    r = colour.rgb.r
-    g = colour.rgb.g
-    b = colour.rgb.b
-    new_colour = (r, g, b)
-    rgb_colours.append(new_colour)
+tim = Turtle()
+tim.hideturtle()
+tim.speed('fastest')
+tim.penup()
 
-print(rgb_colours)
+colour = (random.choice(colour_list))
+
+
+def fill_circle(random_colour):
+    tim.color(random_colour, random_colour)
+    tim.begin_fill()
+    tim.circle(20)
+    tim.end_fill()
+
+
+fill_circle(colour)
+
+screen.exitonclick()
