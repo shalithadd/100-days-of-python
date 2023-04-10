@@ -30,6 +30,7 @@ while is_game_on:
                 print(f'You won!, The {winning_colour} turtle is the winner.')
             else:
                 print(f'You lost!, The {winning_colour} turtle is the winner.')
+                break
         else:
             rand_distance = random.randint(0, 10)
             turtle.forward(rand_distance)
