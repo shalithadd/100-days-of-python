@@ -13,6 +13,7 @@ class Scoreboard(Turtle):
         self.penup()
         self.color('white')
         self.sety(270)
+        self.get_high_score()
         self.update_scoreboard()
 
     def update_scoreboard(self):
@@ -29,3 +30,16 @@ class Scoreboard(Turtle):
             self.high_score = self.score
         self.score = 0
         self.update_scoreboard()
+        self.update_high_score()
+
+    def update_high_score(self):
+        with open('highscore.txt', mode='w') as f:
+            f.write(str(self.high_score))
+
+    def get_high_score(self):
+        with open('highscore.txt', mode='r') as f:
+            self.high_score = int(f.read())
+
+
+
+
