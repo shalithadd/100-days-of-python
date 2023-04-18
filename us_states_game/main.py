@@ -1,30 +1,30 @@
 import turtle
 import pandas
-from states import States
+
 
 screen = turtle.Screen()
 screen.title('U.S. States Game')
 image = 'blank_states_img.gif'
 screen.addshape(image)
 turtle.shape(image)
-states = States()
 
 num_states = 50
 num_guessed_states = 0
 guessed_states = []
 data = pandas.read_csv('50_states.csv')
+all_states = data.state.to_list()
 
 while num_guessed_states < 50:
     answer = screen.textinput(title=f'{num_guessed_states}/{num_states} States Correct',
                               prompt="What's another state name?").title()
-
-    if answer in data.state.to_list() and answer not in guessed_states:
-        state = data.loc[data['state'] == answer, 'state'].values[0]
-        x = data.loc[data['state'] == answer, 'x'].values[0]
-        y = data.loc[data['state'] == answer, 'y'].values[0]
-        pos = (x, y)
-        states.populate_map(position=pos, state=state)
+    if answer in all_states and answer not in guessed_states:
+        state_data = data[data.state == answer]
+        text = turtle.Turtle()
+        text.hideturtle()
+        text.penup()
+        text.goto(state_data.x.item(), state_data.y.item())
+        text.write(answer)
         num_guessed_states += 1
-        guessed_states.append(state)
+        guessed_states.append(answer)
 
 turtle.mainloop()
