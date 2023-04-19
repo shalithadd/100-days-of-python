@@ -26,14 +26,24 @@ import pandas
 # my_data = pandas.DataFrame(data_dict)
 # print(my_data)
 
-data = pandas.read_csv('2018_Central_Park_Squirrel_Census_-_Squirrel_Data.csv')
-gray_squirrels_count = len(data[data['Primary Fur Color'] == 'Gray'])
-red_squirrels_count = len(data[data['Primary Fur Color'] == 'Cinnamon'])
-black_squirrels_count = len(data[data['Primary Fur Color'] == 'Black'])
+# use squirrels data file to filter fur colours and count
+# data = pandas.read_csv('2018_Central_Park_Squirrel_Census_-_Squirrel_Data.csv')
+# gray_squirrels_count = len(data[data['Primary Fur Color'] == 'Gray'])
+# red_squirrels_count = len(data[data['Primary Fur Color'] == 'Cinnamon'])
+# black_squirrels_count = len(data[data['Primary Fur Color'] == 'Black'])
+#
+# data_dict = {
+#     'Fur Colour': ['Gray', 'Red', 'Black'],
+#     'Count': [gray_squirrels_count, red_squirrels_count, black_squirrels_count],
+# }
+# squirrel_fur_data = pandas.DataFrame(data_dict)
+# squirrel_fur_data.to_csv('squirrel_fur_data')
 
-data_dict = {
-    'Fur Colour': ['Gray', 'Red', 'Black'],
-    'Count': [gray_squirrels_count, red_squirrels_count, black_squirrels_count],
-}
-squirrel_fur_data = pandas.DataFrame(data_dict)
-squirrel_fur_data.to_csv('squirrel_fur_data')
+# Loop through a dataframe
+data_dict = {'Students': ['Dinu', 'Shalu', 'Maalu'],
+             'Grades': [75, 65, 72],
+             }
+my_data = pandas.DataFrame(data_dict)
+for index, row in my_data.iterrows():
+    if row.Students == 'Dinu':
+        print(row.Students)
