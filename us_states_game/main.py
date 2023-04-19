@@ -19,10 +19,7 @@ while num_guessed_states < 50:
                               prompt="What's another state name?").title()
 
     if answer == 'Exit':
-        missed_states = []
-        for state in all_states:
-            if state not in guessed_states:
-                missed_states.append(state)
+        missed_states = [state for state in all_states if state not in guessed_states]
         missed_state_data = pandas.DataFrame(missed_states)
         missed_state_data.to_csv('states_to_learn.csv')
         break
@@ -36,5 +33,4 @@ while num_guessed_states < 50:
         text.write(answer)
         num_guessed_states += 1
         guessed_states.append(answer)
-
 
