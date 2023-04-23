@@ -1,7 +1,7 @@
 import tkinter as tk
 
 root = tk.Tk()
-root.minsize(width=300, height=150)
+root.minsize(width=300, height=100)
 root.title('Miles to Km Converter')
 root.config(pady=20, padx=20)
 
