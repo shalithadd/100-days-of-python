@@ -6,8 +6,6 @@ import json
 
 
 # ---------------------------- PASSWORD GENERATOR ------------------------------- #
-
-
 def generate_password():
     letters = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's',
                't', 'u', 'v', 'w', 'x', 'y', 'z', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L',
@@ -63,6 +61,23 @@ def save():
             entry_password.delete(0, 'end')
 
 
+# ---------------------------- SEARCH PASSWORD ------------------------------- #
+def find_password():
+    website = entry_website.get()
+    try:
+        with open('data.json', 'r') as data_file:
+            data = json.load(data_file)
+    except FileNotFoundError:
+        messagebox.showwarning(title='Error', message='Data file not found.')
+    else:
+        if website in data:
+            email = data[website]['email']
+            password = data[website]['password']
+            messagebox.showinfo(title=website, message=f'Email: {email}\nPassword: {password}')
+        else:
+            messagebox.showwarning(title='Error', message=f'No data found for the website {website}.')
+
+
 # ---------------------------- UI SETUP ------------------------------- #
 root = tk.Tk()
 root.title('Password Manager')
@@ -82,8 +97,8 @@ lbl_password = tk.Label(text='password:  ', font=('Arial', 12, 'normal'))
 lbl_password.grid(row=3, column=0)
 
 # Entries
-entry_website = tk.Entry(width=52)
-entry_website.grid(row=1, column=1, columnspan=2)
+entry_website = tk.Entry(width=34)
+entry_website.grid(row=1, column=1)
 entry_website.focus()
 entry_email = tk.Entry(width=52)
 entry_email.grid(row=2, column=1, columnspan=2)
@@ -96,4 +111,6 @@ btn_generate_password = tk.Button(text='Generate Password', command=generate_pas
 btn_generate_password.grid(row=3, column=2)
 btn_add = tk.Button(text='Add', width=44, command=save)
 btn_add.grid(row=4, column=1, columnspan=2)
+btn_search = tk.Button(text='Search', width=14, command=find_password)
+btn_search.grid(row=1, column=2)
 root.mainloop()
