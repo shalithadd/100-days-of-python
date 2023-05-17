@@ -18,12 +18,13 @@ canvas.create_text(400, 300, text='Word', font=(FONT_NAME, 50, 'bold'))
 canvas.grid(row=0, column=0, columnspan=2)
 
 # Place buttons
-img_right = tk.PhotoImage(file='images/right.png')
-img_wrong = tk.PhotoImage(file='images/wrong.png')
-btn_wrong = tk.Button(image=img_wrong, highlightthickness=0)
-btn_wrong.grid(row=1, column=0)
-btn_right = tk.Button(image=img_right, highlightthickness=0)
-btn_right.grid(row=1, column=1)
+img_cross = tk.PhotoImage(file='images/wrong.png')
+btn_unknown = tk.Button(image=img_cross, highlightthickness=0)
+btn_unknown.grid(row=1, column=0)
+
+img_check = tk.PhotoImage(file='images/right.png')
+btn_check = tk.Button(image=img_check, highlightthickness=0)
+btn_check.grid(row=1, column=1)
 
 
 tk.mainloop()
