@@ -51,7 +51,6 @@ btn_unknown.grid(row=1, column=0)
 img_check = tk.PhotoImage(file='images/right.png')
 btn_check = tk.Button(image=img_check, highlightthickness=0, command=next_card)
 btn_check.grid(row=1, column=1)
-
 next_card()
 
 tk.mainloop()
