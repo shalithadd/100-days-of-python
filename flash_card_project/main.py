@@ -1,14 +1,27 @@
 import random
 import tkinter as tk
+
 import pandas
 
 BACKGROUND_COLOR = "#B1DDC6"
 FONT_NAME = "Arial"
 
-# Access words in data.csv
-data = pandas.read_csv('data/french_words.csv')
-to_learn = data.to_dict(orient='records')
+try:
+    data = pandas.read_csv('data/words_to_learn.csv')
+    to_learn = data.to_dict(orient='records')
+except FileNotFoundError:
+    data = pandas.read_csv('data/french_words.csv')
+    to_learn = data.to_dict(orient='records')
+
 current_card = {}
+
+
+def known_word():
+    global current_card
+    to_learn.remove(current_card)
+    updated_words = pandas.DataFrame.from_records(to_learn)
+    updated_words.to_csv('data/words_to_learn.csv', index=False)
+    next_card()
 
 
 def next_card():
@@ -49,7 +62,7 @@ btn_unknown = tk.Button(image=img_cross, highlightthickness=0, command=next_card
 btn_unknown.grid(row=1, column=0)
 
 img_check = tk.PhotoImage(file='images/right.png')
-btn_check = tk.Button(image=img_check, highlightthickness=0, command=next_card)
+btn_check = tk.Button(image=img_check, highlightthickness=0, command=known_word)
 btn_check.grid(row=1, column=1)
 next_card()
 
