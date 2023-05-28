@@ -8,11 +8,9 @@ FONT_NAME = "Arial"
 
 try:
     data = pandas.read_csv('data/words_to_learn.csv')
-    to_learn = data.to_dict(orient='records')
 except FileNotFoundError:
     data = pandas.read_csv('data/french_words.csv')
-    to_learn = data.to_dict(orient='records')
-
+to_learn = data.to_dict(orient='records')
 current_card = {}
 
 
