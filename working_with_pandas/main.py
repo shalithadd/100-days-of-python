@@ -44,6 +44,8 @@ data_dict = {'Students': ['Dinu', 'Shalu', 'Maalu'],
              'Grades': [75, 65, 72],
              }
 my_data = pandas.DataFrame(data_dict)
+print(my_data)
 for index, row in my_data.iterrows():
     if row.Students == 'Dinu':
         print(row.Students)
+        print(index)
