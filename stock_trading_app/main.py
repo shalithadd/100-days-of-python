@@ -26,18 +26,16 @@ def get_stock_data():
 
 def calc_stock_price_differance(data):
     stock_data = data['Time Series (Daily)']
-    count = 0
-    # Access the 2nd and 3rd dict in the stock_data dict to get yesterday and day before yesterday stock data
+    yesterday_closing = None
+    day_before_yesterday_closing = None
+    # Access the 1st and 2nd dict in the stock_data dict to get yesterday and day before yesterday stock data
     for key, value in stock_data.items():
-        # for each key, value pair in stock_data check if the value is a dict and increment the counter
-        if isinstance(value, dict):
-            count += 1
-            if count == 1:
-                yesterday_closing = float(stock_data[key]["4. close"])
-            elif count == 2:
-                day_before_yesterday_closing = float(stock_data[key]["4. close"])
-            elif count > 3:
-                break
+        if yesterday_closing is None:
+            yesterday_closing = float(stock_data[key]["4. close"])
+        elif day_before_yesterday_closing is None:
+            day_before_yesterday_closing = float(stock_data[key]["4. close"])
+        else:
+            break
     diff_percent = round(((day_before_yesterday_closing - yesterday_closing) / yesterday_closing) * 100, 2)
     return diff_percent
 
@@ -50,12 +48,9 @@ def get_news():
     return response.json()
 
 
-def format_message(data, price_differance):
-    if price_differance < 0:
-        up_down_indicator = '🔺'
-    else:
-        up_down_indicator = '🔻'
-    message = f'{STOCK}: {up_down_indicator}{abs(price_differance)}%'
+def format_message(data, price_differance, stock_name):
+    up_down_indicator = '🔺' if price_differance < 0 else '🔻'
+    message = f'{stock_name}: {up_down_indicator}{abs(price_differance)}%'
     for i in range(3):
         message += f"\nHeadline: {data[i]['title']}\nRead article: {data[i]['url']}\n"
     return message
@@ -78,6 +73,6 @@ def send_message(data):
 stock_price_differance = calc_stock_price_differance(get_stock_data())
 if abs(stock_price_differance) > 5:
     news = get_news()['articles'][:3]
-    send_message(format_message(news, stock_price_differance))
+    send_message(format_message(news, stock_price_differance, STOCK))
 
 
