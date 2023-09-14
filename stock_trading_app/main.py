@@ -32,15 +32,14 @@ def calc_stock_price_differance(data):
         # for each key, value pair in stock_data check if the value is a dict and increment the counter
         if isinstance(value, dict):
             count += 1
-            if count == 2:
+            if count == 1:
                 yesterday_closing = float(stock_data[key]["4. close"])
-            elif count == 3:
+            elif count == 2:
                 day_before_yesterday_closing = float(stock_data[key]["4. close"])
             elif count > 3:
                 break
-    price_differance = round(((day_before_yesterday_closing - yesterday_closing) / yesterday_closing) * 100,
-                             2)
-    return price_differance
+    diff_percent = round(((day_before_yesterday_closing - yesterday_closing) / yesterday_closing) * 100, 2)
+    return diff_percent
 
 
 def get_news():
@@ -56,13 +55,9 @@ def format_message(data, price_differance):
         up_down_indicator = '🔺'
     else:
         up_down_indicator = '🔻'
-    message = ''
+    message = f'{STOCK}: {up_down_indicator}{abs(price_differance)}%'
     for i in range(3):
-        message += f'''
-{STOCK}: {up_down_indicator}{price_differance}%
-Headline: {data[i]['title']}
-Read article: {data[i]['url']}
-'''
+        message += f"\nHeadline: {data[i]['title']}\nRead article: {data[i]['url']}\n"
     return message
 
 
@@ -81,6 +76,8 @@ def send_message(data):
 
 
 stock_price_differance = calc_stock_price_differance(get_stock_data())
-if stock_price_differance < -2 or stock_price_differance > 2:
+if abs(stock_price_differance) > 5:
     news = get_news()['articles'][:3]
     send_message(format_message(news, stock_price_differance))
+
+
