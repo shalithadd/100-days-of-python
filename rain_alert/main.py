@@ -4,7 +4,7 @@ from twilio.rest import Client
 from dotenv import load_dotenv
 import os
 
-load_dotenv('../.env')
+load_dotenv('../stock_trading_app/.env')
 
 OWM_APIKEY = os.getenv('OWM_APIKEY')
 OWM_Endpoint = 'https://api.openweathermap.org/data/3.0/onecall'

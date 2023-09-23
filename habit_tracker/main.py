@@ -1,6 +1,5 @@
 import os
-from datetime import datetime
-
+from datetime import datetime, timedelta
 import requests
 from dotenv import load_dotenv
 
@@ -45,7 +44,7 @@ response = requests.post(url=pixel_create_endpoint, json=pixel_params, headers=h
 print(response.text)
 
 pixel_edit_endpoint = f'{pixel_create_endpoint}/{day}'
-pixel_edit_params = {'quantity': '10.5'}
+pixel_edit_params = {'quantity': '3.20'}
 
 # response = requests.put(url=pixel_edit_endpoint, json=pixel_edit_params, headers=headers)
 # print(response.text)
